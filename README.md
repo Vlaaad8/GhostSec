@@ -10,7 +10,7 @@ Sistemul rulează pe un dispozitiv **Raspberry Pi**, asigurând un consum redus 
 
 Echipa noastră combină expertiza în securitate, software engineering și arhitectură de sisteme pentru a construi o soluție modernă, scalabilă și educațională.
 Echipa a fost formata din:
-  * Balahura Vlad - Frotend
+  * Balahura Vlad - Frontend
   * Hordoan Darius - Backend
   * Moga Antonia - Backend & Prezentare
   * Pricope Dorina - Prezentare
