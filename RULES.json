@@ -1,0 +1,164 @@
+{
+  "rules": [
+    {
+      "name": "Path Traversal Detection",
+      "description": "Detects directory traversal attempts (raw and percent-encoded)",
+      "applies_to": ["url"],
+      "url_check": "raw_and_decoded",
+      "is_regex": true,
+      "patterns": [
+        "\\.\\./",
+        "%2E%2E%2F",
+        "%2e%2e%2f",
+        "\\.\\.%2f",
+        "%2e%2e/",
+        "\\./\\./\\.",
+        "/etc/passwd",
+        "/etc/shadow"
+      ],
+      "severity": "high",
+      "category": "path_traversal"
+    },
+
+    {
+      "name": "SQL Injection Detection",
+      "description": "Detects common SQL injection patterns (including URL-encoded variants)",
+      "applies_to": ["url"],
+      "url_check": "raw_and_decoded",
+      "is_regex": true,
+      "patterns": [
+        "'\\s*or\\s*'1'\\s*=\\s*'1",
+        "--\\s",
+        ";--",
+        "\\/\\*",
+        "UNION\\s+SELECT",
+        "DROP\\s+TABLE",
+        "SELECT\\s+FROM",
+        "'\\s*OR\\s*1=1",
+        "1=1--",
+        "%27%20OR%20%271%27%3D%271",
+        "%27%20OR%201=1%20--"
+      ],
+      "severity": "critical",
+      "category": "sql_injection"
+    },
+
+    {
+      "name": "XSS Attack Detection",
+      "description": "Detects Cross-Site Scripting attempts in URLs (raw + encoded)",
+      "applies_to": ["url"],
+      "url_check": "raw_and_decoded",
+      "is_regex": true,
+      "patterns": [
+        "<script",
+        "<\\/script>",
+        "javascript:",
+        "onerror=",
+        "onload=",
+        "eval\\(",
+        "alert\\(",
+        "<img\\s+src=",
+        "%3Cscript%3E",
+        "%3Cimg%20src%3D"
+      ],
+      "severity": "high",
+      "category": "xss"
+    },
+
+    {
+      "name": "Command Injection",
+      "description": "Detects OS command injection attempts embedded in URLs",
+      "applies_to": ["url"],
+      "url_check": "raw_and_decoded",
+      "is_regex": true,
+      "patterns": [
+        "\\|\\s*cat\\s+",
+        ";\\s*cat\\s+",
+        "\\|\\s*ls\\s*",
+        ";\\s*ls\\s*",
+        "\\|\\s*wget\\s+",
+        ";\\s*wget\\s+",
+        "`[^`]+`",
+        "\\$\\([^\\)]+\\)"
+      ],
+      "severity": "critical",
+      "category": "command_injection"
+    },
+
+    {
+      "name": "File Inclusion",
+      "description": "Detects Local/Remote File Inclusion attempts in URLs",
+      "applies_to": ["url"],
+      "url_check": "raw_and_decoded",
+      "is_regex": true,
+      "patterns": [
+        "php:\/\/",
+        "file:\/\/",
+        "https?:\/\/",
+        "ftp:\/\/",
+        "data:\/\/",
+        "\\.inc(\\b|$)"
+      ],
+      "severity": "high",
+      "category": "file_inclusion"
+    },
+
+    {
+      "name": "Web Shell Detection",
+      "description": "Detects potential web shell filenames or calls in URLs",
+      "applies_to": ["url"],
+      "url_check": "raw_and_decoded",
+      "is_regex": true,
+      "patterns": [
+        "\\.php\\.jpg",
+        "\\.asp\\.jpg",
+        "\\.jsp\\.jpg",
+        "\\.php%00",
+        "shell\\.php",
+        "cmd\\.php",
+        "system\\.php",
+        "exec\\("
+      ],
+      "severity": "critical",
+      "category": "webshell"
+    },
+
+    {
+      "name": "Suspicious HTTP Methods",
+      "description": "Detects potentially dangerous HTTP methods when present in logs",
+      "applies_to": ["method","url"],
+      "url_check": "raw",
+      "is_regex": true,
+      "patterns": [
+        "^TRACE\\b",
+        "^TRACK\\b",
+        "^CONNECT\\b",
+        "^PUT\\b",
+        "^DELETE\\b"
+      ],
+      "severity": "medium",
+      "category": "http_method"
+    },
+
+    {
+      "name": "Information Disclosure",
+      "description": "Detects attempts to access sensitive files or debug flags",
+      "applies_to": ["url"],
+      "url_check": "raw_and_decoded",
+      "is_regex": true,
+      "patterns": [
+        "\\.env",
+        "\\.git",
+        "\\.svn",
+        "\\.htaccess",
+        "\\.htpasswd",
+        "wp-config\\.php",
+        "config\\.php",
+        "debug=true",
+        "%64%65%62%75%67%3Dtrue"
+      ],
+      "severity": "medium",
+      "category": "info_disclosure"
+    }
+  ]
+}

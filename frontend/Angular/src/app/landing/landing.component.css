@@ -1,0 +1,270 @@
+.landing-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: #0b1226; /* albastru foarte închis, futurist */
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* GRID */
+.cyber-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    linear-gradient(rgba(95, 168, 245, 0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(95, 168, 245, 0.15) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: gridScroll 20s linear infinite;
+}
+
+/* SCANLINES */
+.scanlines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(95, 168, 245, 0.05) 2px,
+    rgba(95, 168, 245, 0.05) 4px
+  );
+  pointer-events: none;
+  animation: scanline 8s linear infinite;
+}
+
+/* CONTENT */
+.content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  max-width: 800px;
+  padding: 40px;
+}
+
+/* GLITCH TITLE */
+.glitch {
+  font-size: 72px;
+  font-weight: 900;
+  color: rgb(97, 168, 245);
+  text-transform: uppercase;
+  position: relative;
+  text-shadow:
+    0 0 30px rgba(95, 168, 245, 0.9),
+    0 0 40px rgba(95, 168, 245, 0.6);
+  animation: glitch 2s infinite;
+  letter-spacing: 8px;
+}
+
+/* SUBTITLE */
+.subtitle {
+  color: #ffffff;
+  font-size: 18px;
+  letter-spacing: 4px;
+  margin-bottom: 40px;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+    text-shadow:
+    0 0 30px rgba(211, 215, 219, 0.9),
+    0 0 40px rgba(195, 198, 201, 0.6);
+}
+
+/* TYPING */
+.typing {
+  overflow: hidden;
+  border-right: 2px solid #5fa8f5;
+  white-space: nowrap;
+  animation: typing 3s steps(30) 1s infinite;
+}
+
+/* TERMINAL BOX */
+.terminal {
+  background: rgba(10, 20, 40, 0.8);
+  border: 2px solid #5fa8f5;
+  border-radius: 8px;
+  padding: 24px;
+  text-align: left;
+  margin: 40px 0;
+  box-shadow:
+    0 0 20px rgba(95, 168, 245, 0.25),
+    inset 0 0 20px rgba(95, 168, 245, 0.1);
+  font-family: 'Courier New', monospace;
+}
+
+.terminal-line {
+  color: #b4d8ff;
+  font-size: 14px;
+  margin: 8px 0;
+  overflow: hidden;        /* ascunde textul până apare */
+  white-space: nowrap;     /* să fie pe un singur rând */
+  width: 0;                /* start invizibil */
+  animation: typingLine 1s steps(30) forwards; /* animație scriere */
+}
+
+.terminal-line:nth-child(1) { animation-delay: 0s; }
+.terminal-line:nth-child(2) { animation-delay: 1s; }
+.terminal-line:nth-child(3) { animation-delay: 2s; }
+.terminal-line:nth-child(4) { animation-delay: 3s; }
+
+@keyframes typingLine {
+  from { width: 0; opacity: 0; }
+  to { width: 100%; opacity: 1; }
+}
+
+.prompt {
+  color: #4be60e;
+  font-weight:bold;
+  font-size: 16px;
+}
+
+/* BUTTON */
+.proceed-btn {
+  background: rgba(97, 168, 245, 0.30); 
+  border: none;
+  color: #e9f3ff;
+  padding: 14px 42px;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: all 0.25s ease;
+  font-family: 'Courier New', monospace;
+  backdrop-filter: blur(6px);
+  box-shadow:
+    0 0 12px rgba(97, 168, 245, 0.55),
+    inset 0 0 8px rgba(255, 255, 255, 0.05);
+    margin-left: 120px;
+}
+.proceed-btn {
+  display: flex;
+  align-items: center;      /* ✅ aliniază vertical text + icon */
+  gap: 8px;                 /* spațiu între text și icon */
+}
+
+
+.proceed-btn:hover {
+  background: rgba(97, 168, 245, 0.45);
+  box-shadow:
+    0 0 18px rgba(97, 168, 245, 0.85),
+    inset 0 0 12px rgba(255, 255, 255, 0.12);
+  transform: translateY(-3px);
+}
+
+.proceed-btn:active {
+  transform: translateY(0px) scale(0.97);
+  background: rgba(97, 168, 245, 0.55);
+  box-shadow:
+    0 0 10px rgba(97, 168, 245, 0.65),
+    inset 0 0 6px rgba(255, 255, 255, 0.18);
+}
+
+
+/* STATUS BAR */
+.status-bar {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 60px;
+  padding: 16px;
+  background: rgba(10, 20, 40, 0.6);
+  border: 1px solid rgba(95, 168, 245, 0.3);
+  border-radius: 4px;
+}
+
+.status-item {
+  color: #5fa8f5;
+  font-size: 12px;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 1px;
+}
+
+.online {
+  color: #a8d3ff;
+  font-weight: bold;
+}
+
+.warning {
+  color: #cbe3ff;
+  font-weight: bold;
+}
+
+/* PARTICLES */
+.particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: #5fa8f5;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(95, 168, 245, 0.8);
+  animation: float 10s infinite ease-in-out;
+}
+
+
+.particle:nth-child(1) { left: 10%; top: 20%;}
+.particle:nth-child(2) { left: 20%; top: 80%; }
+.particle:nth-child(3) { left: 30%; top: 40%;  }
+.particle:nth-child(4) { left: 40%; top: 60%;  }
+.particle:nth-child(5) { left: 50%; top: 30%; }
+.particle:nth-child(7) { left: 70%; top: 50%;  }
+.particle:nth-child(8) { left: 80%; top: 20%;  }
+.particle:nth-child(9) { left: 90%; top: 80%;  }
+.particle:nth-child(10) { left: 15%; top: 60%;  }
+.particle:nth-child(11) { left: 25%; top: 10%; }
+.particle:nth-child(12) { left: 35%; top: 90%;  }
+.particle:nth-child(13) { left: 45%; top: 15%;  }
+.particle:nth-child(14) { left: 55%; top: 85%;  }
+.particle:nth-child(15) { left: 65%; top: 35%;  }
+.particle:nth-child(16) { left: 75%; top: 65%; }
+.particle:nth-child(17) { left: 85%; top: 45%;  }
+.particle:nth-child(18) { left: 95%; top: 55%;  }
+.particle:nth-child(19) { left: 12%; top: 75%;  }
+.particle:nth-child(20) { left: 88%; top: 25%;  }
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-100px) translateX(50px);
+  }
+}
+
+@media (max-width: 768px) {
+  .glitch {
+    font-size: 48px;
+  }
+
+  .content {
+    padding: 20px;
+  }
+
+  .status-bar {
+    flex-direction: column;
+    gap: 8px;
+  }
+}

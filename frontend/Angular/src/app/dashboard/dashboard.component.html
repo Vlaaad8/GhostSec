@@ -1,0 +1,131 @@
+<div class="dashboard-container">
+  <div class="cyber-background"></div>
+
+  <header class="dashboard-header">
+    <div class="header-left">
+      <h1 class="header-title">Dashboard</h1>
+      <span class="header-subtitle">Real-time Threat Monitoring</span>
+    </div>
+    <div class="header-right">
+      <div class="status-indicator">
+        <span class="status-dot"></span>
+        <span>MONITORING ACTIVE</span>
+      </div>
+      <div style="padding-left:5px;"> <button (click)="handleHome()" mat-icon-button><mat-icon>home</mat-icon></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="dashboard-grid">
+    <section class="panel logs-panel">
+      <div class="panel-header">
+        <h2 class="panel-title">
+          <span class="icon">📋</span>
+          SYSTEM LOGS
+        </h2>
+        <span class="panel-badge">{{ logs.length }}</span>
+      </div>
+      <div class="panel-content">
+        <div class="logs-container">
+          <div class="log-header" *ngIf="logs.length > 0">
+            <span>Timestamp</span>
+            <span>IP</span>
+            <span>Request URL</span>
+            <span>Matched Rules </span>
+          </div>
+
+          <div *ngFor="let log of logs" class="log-entry"
+            [ngClass]="log.matched_rules > 0 ? 'log-critical' : 'log-info'">
+            <span class="log-timestamp">{{log.timestamp}}</span>
+            <span class="log-level">{{ log.ip_address }}</span>
+            <span [ngClass]="log.matched_rules > 0 ? 'log-match-red' : 'log-source'">{{ log.request_url }}</span>
+            <span class="log-info">{{log.matched_rules || 0}}</span>
+          </div>
+          <div *ngIf="logs.length == 0"><span>No data yet</span>
+            <p>
+              Waiting for incoming logs...
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel network-panel">
+      <div class="panel-header">
+        <h2 class="panel-title">
+          <span class="icon">🌐</span>
+          NETWORK DATA
+        </h2>
+        <span class="panel-badge">{{ networkData1.length }}</span>
+      </div>
+      <div class="panel-content">
+        <div class="network-table">
+          <div class="network-header" *ngIf="networkData1.length > 0">
+            <span>PROTOCOL</span>
+            <span>SOURCE</span>
+            <span>DESTINATION</span>
+            <span>PORT</span>
+            <span>REQUESTS</span>
+            <span>TIMESTAMP</span>
+          </div>
+          <div *ngFor="let data of networkData1" class="network-row">
+            <span class="network-protocol">{{ data.protocol }}</span>
+            <span class="network-ip">{{ data.source }}</span>
+            <span class="network-ip">{{ data.destination }}</span>
+            <span class="network-port">{{ data.port }}</span>
+            <span class="network-bytes">{{ data.packets }}</span>
+            <span class="log-timestamp">{{data.timestamp}}</span>
+          </div>
+
+          <div *ngIf="networkData1.length == 0">
+            <span>No data yet</span>
+            <p>
+              Waiting for incoming network data...
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel interpretations-panel">
+      <div class="panel-header">
+        <h2 class="panel-title">
+          <span class="icon">🔍</span>
+          THREAT ANALYSIS
+        </h2>
+        <span class="panel-badge">{{ interpretations.length }}</span>
+      </div>
+      <div class="panel-content">
+        <div class="interpretations-container">
+          <div *ngFor="let item of interpretations" class="interpretation-card"
+            [ngClass]="getSeverityClass(item.severity_level)">
+            <div class="interpretation-header">
+              <h3 class="interpretation-title">{{ item.alert_title }}</h3>
+              <span class="interpretation-severity">{{ item.severity_level.toUpperCase() }}</span>
+            </div>
+            <p class="interpretation-description">{{ item.alert_description }}</p>
+            <div class="interpretation-recommendation">
+              <strong>Recommendation:</strong> {{ item.recommended }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel graph-panel">
+      <div class="panel-header">
+        <h2 class="panel-title">
+          <span class="icon">📊</span>
+          IP NETWORK GRAPH
+        </h2>
+      </div>
+      <div class="panel-content">
+        <div class="graph-container2">
+          <div #networkContainer ></div>
+
+
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

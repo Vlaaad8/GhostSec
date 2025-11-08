@@ -1,0 +1,42 @@
+<div class="landing-container" #particleContainer>
+  <div class="cyber-grid"></div>
+  <div class="scanlines"></div>
+
+  <div class="content">
+    <div class="glitch-wrapper">
+      <h1 class="glitch" data-text="CYBER SECURITY">GhostSec</h1>
+    </div>
+    <br>
+    <br>
+    <div class="subtitle">
+      <span class="typing">Advanced monitoring system</span>
+    </div>
+
+    <div class="terminal">
+      <div class="terminal-line">
+        <span class="prompt">root&#64;GhostSec:~$</span>
+        <span class="command"> initializing system...</span>
+      </div>
+      <div class="terminal-line">
+        <span class="prompt">root&#64;GhostSec:~$</span>
+        <span class="command"> loading creativity...</span>
+      </div>
+      <div class="terminal-line">
+        <span class="prompt">root&#64;GhostSec:~$</span>
+        <span class="command"> activating network...</span>
+      </div>
+      <div class="terminal-line">
+        <span class="prompt">root&#64;GhostSec:~$</span>
+        <span class="command"> system ready...</span>
+      </div>
+    </div>
+
+    <button class="proceed-btn" (click)="proceed()">
+      <span class="btn-text">Proceed </span>
+      <span class="btn-icon"><mat-icon>arrow_forward</mat-icon></span>
+    </button>
+
+<div class="particles">
+    <div class="particle" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]"></div>
+  </div>
+</div>
